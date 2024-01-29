@@ -1,5 +1,5 @@
 const express = require('express')
-const { users } = require('src/js/users')
+const { users } = require('./users')
 var cors = require('cors')
 const app = express()
 const port = 3000;
@@ -20,6 +20,16 @@ if(p == undefined){
 }
 res.json(p)
 })
+
+app.get('/api/users',(req,res)=>{
+    
+    let result = users.map(user => ({
+        id: user.id,
+        userName: user.userName
+    }))
+     res.json(result)
+});
+
 
 function getNextId(){
     let m = Math.max(...users.map(user => user.id))
