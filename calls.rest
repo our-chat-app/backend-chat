@@ -1,0 +1,8 @@
+### Get all
+GET http://localhost:3000/api
+
+### Get single
+GET http://localhost:3000/api
+
+### Create new
+POST http://localhost:3000/api
