@@ -1,5 +1,5 @@
 const express = require('express')
-const { users } = require('./users')
+const { users } = require('./src/js/users')
 var cors = require('cors')
 const app = express()
 const port = 3000;
