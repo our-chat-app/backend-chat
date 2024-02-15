@@ -2,7 +2,18 @@
 GET http://localhost:3000/api/users
 
 ### Get single
-GET http://localhost:3000/api/users:anvId
+GET http://localhost:3000/api/user:anvId
 
 ### Create new
 POST http://localhost:3000/api
+
+###Signup Create user
+POST  http://localhost:3000/api/users
+Content-Type: application/json; charset=utf-8
+
+{
+    "firstName": "William",
+     "email":"william@hej.se",
+     "password": "hej123"
+}
+
