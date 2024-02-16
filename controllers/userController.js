@@ -23,8 +23,8 @@ async function onLogin(req,res){
         return res.status(401).json('Login failed');
     }
     
-    const passwordVaild = await bcrypt.compare(password, user.password);
-    if (!passwordVaild){
+    const passwordValid = await bcrypt.compare(password, user.password);
+    if (!passwordValid){
         return res.status(401).json('Login failed');
     }
     req.session.userId = user.id;

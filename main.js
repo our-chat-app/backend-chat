@@ -67,6 +67,8 @@ function getNextId(){
 // res.status(201).send('Created')
 // });
 app.post('/api/users', userController.onCreateUser);
+app.post('/api/signIn', userController.onLogin)
+
 
 // app.listen(port, () => {
 //     console.log(`Example app listening on port ${port}`)
