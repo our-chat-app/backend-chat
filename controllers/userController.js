@@ -34,15 +34,15 @@ async function onLogin(req,res){
 }
 
 async function onCreateUser(req, res){
-    const {firstName, email, password} = req.body
+    const {nickname, email, password} = req.body
     const hashedPassword = await bcrypt.hash(password, 10)
 
     await UserAccount.create({
-        firstName: firstName,
+        nickname: nickname,
         email: email,
         password:hashedPassword
     })
-    res.status(204).json({ email })
+    res.status(201).json({ email })
 }
 
 

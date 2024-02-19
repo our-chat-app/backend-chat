@@ -12,8 +12,8 @@ POST  http://localhost:3000/api/users
 Content-Type: application/json; charset=utf-8
 
 {
-    "firstName": "William",
-     "email":"william@hej.se",
-     "password": "hej123"
+     "email":"asrinne@hej.se",
+     "password": "hej123",
+     "nickname": "Asrinne"
 }
 
