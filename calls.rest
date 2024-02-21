@@ -17,3 +17,11 @@ Content-Type: application/json; charset=utf-8
      "nickname": "Asrinne"
 }
 
+### Message
+POST  http://localhost:3000/api/message
+Content-Type: application/json; charset=utf-8
+
+{
+     "message": "hallihallå",
+     "userId": 1
+}

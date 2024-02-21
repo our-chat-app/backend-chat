@@ -1,6 +1,7 @@
 const express = require('express');
 const session = require('express-session');
 const { UserAccount } = require('./models');
+const { Message } = require('./models');
 
 const { check, validationResult } = require('express-validator');
 const { validateCreateUser } = require('./validators/userValidators.js');
@@ -10,6 +11,7 @@ var cors = require('cors');
 const app = express();
 const port = 3000;
 const userController = require('./controllers/userController.js');
+const messageController = require('./controllers/messageController.js');
 
 const migrationhelper = require('./migrationhelper');
 
@@ -68,6 +70,7 @@ function getNextId() {
 // console.log(req.body)
 // res.status(201).send('Created')
 // });
+app.post('/api/message',messageController.onCreateMessage );
 app.post('/api/users', validateCreateUser, userController.onCreateUser);
 app.post('/api/signIn', userController.onLogin);
 

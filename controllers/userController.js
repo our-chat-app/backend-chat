@@ -1,13 +1,13 @@
 const { UserAccount } = require('../models')
 const bcrypt  = require('bcrypt')
-async function onHej(req, res){
+/* async function onHej(req, res){
     //res.send('Hej')
     const id = req.session.userId
     const user = await UserAccount.findOne({
         where: {id}
     });
     res.json(user)
-}
+} */
 
 async function onLogin(req,res){
     /* 1. ta lösenordet och email från req.body 
@@ -47,7 +47,7 @@ async function onCreateUser(req, res){
 
 
 module.exports ={
-    onHej,
+    /* onHej, */
     onLogin,
     onCreateUser
 }
