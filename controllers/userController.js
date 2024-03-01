@@ -28,6 +28,7 @@ async function onLogin(req,res){
         return res.status(401).json('Login failed');
     }
     req.session.userId = user.id;
+    
 
     res.json({status:"Yepp"})
 

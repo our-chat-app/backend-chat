@@ -74,11 +74,8 @@ app.post('/api/message',messageController.onCreateMessage );
 app.post('/api/users', validateCreateUser, userController.onCreateUser);
 app.post('/api/signIn', userController.onLogin);
 
-// app.listen(port, () => {
-//     console.log(`Example app listening on port ${port}`)
-//   })
 
 app.listen(port, async () => {
   await migrationhelper.migrate();
-  console.log(`Example app listening2 on port ${port}`);
+  console.log(`Example app listening on port ${port}`);
 });
