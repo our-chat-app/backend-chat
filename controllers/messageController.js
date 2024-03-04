@@ -6,13 +6,13 @@ const { UserAccount } = require('../models')
 async function onCreateMessage(req, res){
 
     const {message} = req.body
-    const user = await UserAccount.findOne({
+    let user = await UserAccount.findOne({
         where: {id:req.session.userId}
     })
     console.log(user)
     await Message.create({
         userId: user.id,
-        message:message
+        message:message,
     })
     res.status(201).json('Message sent!');
     

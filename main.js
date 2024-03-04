@@ -22,7 +22,7 @@ app.use(
     credentials: true,
   })
 );
-  
+
 app.use(
   session({
     secret: 'my-secret-key',
@@ -48,11 +48,29 @@ app.get('/api/users', async (req, res) => {
   let users = await UserAccount.findAll();
   let result = users.map((user) => ({
     id: user.id,
-    firstName: user.firstName,
+    nickname: user.nickname,
   }));
   res.json(result);
 });
 // console.log(user)
+app.get('/api/messages', async (req, res) => {
+  let messages = await Message.findAll();
+  let result = messages.map((user) => ({
+    userId: user.id,
+    message: user.message,
+    nickname:getUsernameFor(user.id),
+    isCurrrentUser: user.id == req.session.userId
+  }));
+  res.json(result);
+});
+
+function getUsernameFor(){
+  let users = UserAccount.findAll();
+  let result = users.map((user) => ({
+    nickname: user.nickname,
+  }));
+  return result
+}
 
 function getNextId() {
   let m = Math.max(...users.map((user) => user.id));
@@ -70,10 +88,9 @@ function getNextId() {
 // console.log(req.body)
 // res.status(201).send('Created')
 // });
-app.post('/api/message',messageController.onCreateMessage );
+app.post('/api/message', messageController.onCreateMessage);
 app.post('/api/users', validateCreateUser, userController.onCreateUser);
 app.post('/api/signIn', userController.onLogin);
-
 
 app.listen(port, async () => {
   await migrationhelper.migrate();
