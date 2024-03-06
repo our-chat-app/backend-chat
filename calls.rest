@@ -1,5 +1,5 @@
 ### Get all
-GET http://localhost:3000/api/users
+GET http://localhost:3000/api/messages
 
 ### Get single
 GET http://localhost:3000/api/user:anvId

@@ -32,10 +32,12 @@ app.use(
   })
 );
 
-// app.use(cors())
+
+
+
+
 
 app.get('/api/users/:anvId', (req, res) => {
-  console.log(req.params.anvId);
 
   let p = users.find((user) => user.id == req.params.anvId);
   if (p == undefined) {
@@ -52,42 +54,13 @@ app.get('/api/users', async (req, res) => {
   }));
   res.json(result);
 });
-// console.log(user)
-app.get('/api/messages', async (req, res) => {
-  let messages = await Message.findAll();
-  let result = messages.map((user) => ({
-    userId: user.id,
-    message: user.message,
-    nickname:getUsernameFor(user.id),
-    isCurrrentUser: user.id == req.session.userId
-  }));
-  res.json(result);
-});
+app.get('/api/messages', messageController.getMessages)
 
-function getUsernameFor(){
-  let users = UserAccount.findAll();
-  let result = users.map((user) => ({
-    nickname: user.nickname,
-  }));
-  return result
-}
+// function getNextId() {
+//   let m = Math.max(...users.map((user) => user.id));
+//   return m + 1;
+// }
 
-function getNextId() {
-  let m = Math.max(...users.map((user) => user.id));
-  return m + 1;
-}
-
-// app.post('/api/users',(req,res)=>{
-//     const user = {
-//         firstName:req.body.firstName,
-//       password: req.body.password,
-//       email: req.body.email,
-//         id:getNextId()
-//     }
-//     // users.push(user)
-// console.log(req.body)
-// res.status(201).send('Created')
-// });
 app.post('/api/message', messageController.onCreateMessage);
 app.post('/api/users', validateCreateUser, userController.onCreateUser);
 app.post('/api/signIn', userController.onLogin);
