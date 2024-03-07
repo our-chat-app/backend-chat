@@ -8,7 +8,7 @@ const { validateCreateUser} = require('./validators/userValidators.js');
 const { validateLoginUser } = require('./validators/loginValidators.js');
 const { validateMessage } = require('./validators/messageValidators.js');
 
-// const { users } = require('./src/js/users')
+
 var cors = require('cors');
 const app = express();
 const port = 3000;
@@ -16,6 +16,7 @@ const userController = require('./controllers/userController.js');
 const messageController = require('./controllers/messageController.js');
 
 const migrationhelper = require('./migrationhelper');
+const { requireAuth } = require('./middlewares/requireAuth.js');
 
 app.use(express.json());
 app.use(
@@ -52,7 +53,7 @@ app.get('/api/users', async (req, res) => {
   }));
   res.json(result);
 });
-app.get('/api/messages', messageController.getMessages)
+app.get('/api/messages', requireAuth, messageController.getMessages)
 
 // function getNextId() {
 //   let m = Math.max(...users.map((user) => user.id));
