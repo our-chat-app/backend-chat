@@ -4,7 +4,9 @@ const { UserAccount } = require('./models');
 const { Message } = require('./models');
 
 const { check, validationResult } = require('express-validator');
-const { validateCreateUser } = require('./validators/userValidators.js');
+const { validateCreateUser} = require('./validators/userValidators.js');
+const { validateLoginUser } = require('./validators/loginValidators.js');
+const { validateMessage } = require('./validators/messageValidators.js');
 
 // const { users } = require('./src/js/users')
 var cors = require('cors');
@@ -33,10 +35,6 @@ app.use(
 );
 
 
-
-
-
-
 app.get('/api/users/:anvId', (req, res) => {
 
   let p = users.find((user) => user.id == req.params.anvId);
@@ -61,9 +59,9 @@ app.get('/api/messages', messageController.getMessages)
 //   return m + 1;
 // }
 
-app.post('/api/message', messageController.onCreateMessage);
+app.post('/api/message', validateMessage, messageController.onCreateMessage);
 app.post('/api/users', validateCreateUser, userController.onCreateUser);
-app.post('/api/signIn', userController.onLogin);
+app.post('/api/signIn', validateLoginUser, userController.onLogin);
 
 app.listen(port, async () => {
   await migrationhelper.migrate();

@@ -1,6 +1,7 @@
 const { check, validationResult } = require('express-validator');
+const { escape } = require('mysql2');
 
-const validateCreateUser = [
+const validateLoginUser = [
   check('email')
     .trim()
     .normalizeEmail()
@@ -9,14 +10,6 @@ const validateCreateUser = [
     .not()
     .isEmpty()
     .withMessage('Empty  email address!')
-    .escape(),
-  check('nickname')
-    .trim()
-    .not()
-    .isEmpty()
-    .withMessage('Name can not be empty!')
-    .isLength({ min: 2 })
-    .withMessage('Minimum 2 characters required!')
     .escape(),
   check('password')
     .trim()
@@ -36,5 +29,5 @@ const validateCreateUser = [
 ];
 
 module.exports = {
-  validateCreateUser,
+  validateLoginUser,
 };
