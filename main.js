@@ -21,7 +21,7 @@ const { requireAuth } = require('./middlewares/requireAuth.js');
 app.use(express.json());
 app.use(
   cors({
-    origin: 'http://localhost:5501', //Ändra port senare
+    origin: 'http://192.168.132.120:5173', //Ändra port senare
     credentials: true,
   })
 );
@@ -64,7 +64,7 @@ app.post('/api/message', validateMessage, messageController.onCreateMessage);
 app.post('/api/users', validateCreateUser, userController.onCreateUser);
 app.post('/api/signIn', validateLoginUser, userController.onLogin);
 
-app.listen(port, async () => {
+app.listen(port, "192.168.132.120", async () => {
   await migrationhelper.migrate();
   console.log(`Example app listening on port ${port}`);
 });
